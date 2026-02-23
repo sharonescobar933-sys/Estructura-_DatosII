@@ -1,0 +1,47 @@
+import java.util.HashMap;
+import java.util.ArrayList;
+import java.util.List;
+
+public class GrafoLista {
+
+    private HashMap<String, List<String>> grafo;
+
+    /
+    public GrafoLista() {
+        grafo = new HashMap<>();
+    }
+
+
+    public void agregarVertice(String vertice) {
+        if (!grafo.containsKey(vertice)) {
+            grafo.put(vertice, new ArrayList<>());
+        }
+    }
+
+    public void agregarArista(String origen, String destino) {
+
+        agregarVertice(origen);
+        agregarVertice(destino);
+
+        grafo.get(origen).add(destino);
+        grafo.get(destino).add(origen);
+    }
+
+
+    public void mostrarGrafo() {
+        for (String vertice : grafo.keySet()) {
+            System.out.println(vertice + " -> " + grafo.get(vertice));
+        }
+    }
+
+    public static void main(String[] args) {
+
+        GrafoLista grafo = new GrafoLista();
+
+        grafo.agregarArista("A", "B");
+        grafo.agregarArista("A", "C");
+        grafo.agregarArista("B", "D");
+
+        grafo.mostrarGrafo();
+    }
+}
